@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "cp -r src/images dist/images && html-minifier -o dist/index.html --collapse-inline-tag-whitespace --collapse-whitespace --minify-css true src/index.html",
+    "dev": "serve src"
+  },
+  "devDependencies": {
+    "html-minifier": "^4.0.0",
+    "serve": "^13.0.2"
+  }
+}
