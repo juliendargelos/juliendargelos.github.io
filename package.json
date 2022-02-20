@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist",
-    "build": "cp -r src/images dist/images && cp src/CNAME dist/CNAME && html-minifier -o dist/index.html --collapse-inline-tag-whitespace --collapse-whitespace --minify-css true src/index.html",
+    "build": "cp -r src/images dist/images && cp src/CNAME dist/CNAME && html-minifier -o dist/index.html --collapse-inline-tag-whitespace --collapse-whitespace --conservative-collapse --minify-css true src/index.html",
     "dev": "serve src"
   },
   "devDependencies": {
