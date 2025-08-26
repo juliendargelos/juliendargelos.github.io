@@ -79,5 +79,81 @@
         <li>contributeur open source sur github: <a href="https://github.com/juliendargelos" target="_blank">@juliendargelos</a></li>
       </ul>
     </div>
+
+    <script>
+      (async () => {
+        try {
+          const image = document.querySelector('img')
+
+          await new Promise((resolve, reject) => image.complete ? resolve() : (
+            image.addEventListener('load', resolve, { once: true }),
+            image.addEventListener('error', reject, { once: true })
+          ))
+
+          const pixel = 4
+          const { naturalWidth: width, naturalHeight: height } = image
+          const { userAgent } = navigator
+          const safari = (
+            userAgent.includes('Safari') &&
+            !userAgent.includes('Chrome') &&
+            !userAgent.includes('Chromium')
+          )
+
+          let x, y, i, color
+          let gradients = ''
+          let positions = ''
+
+          let context = document.createElement('canvas').getContext('2d')
+          context.canvas.width = width
+          context.canvas.height = height
+          context.drawImage(image, 0, 0)
+
+          const { data: d } = context.getImageData(0, 0, width, height)
+
+          context.canvas.width = 0
+          context.canvas.height = 0
+          context = undefined
+
+          for (y = 0; y < height; y += pixel) {
+            gradients += 'linear-gradient(to right'
+
+            for (x = 0; x < width; x += pixel) {
+              color = (
+                d[i = (x     +  y      * width) * 4] + d[i + 1] + d[i + 2] === 765 ||
+                d[i = (x     + (y + 1) * width) * 4] + d[i + 1] + d[i + 2] === 765 ||
+                d[i = (x + 1 +  y      * width) * 4] + d[i + 1] + d[i + 2] === 765 ||
+                d[i = (x + 1 + (y + 1) * width) * 4] + d[i + 1] + d[i + 2] === 765
+              ) ? '#fff' : '#000'
+
+              gradients += `,${color} ${x / width * 100}%,${color} ${((x + pixel) / width) * 100}%`
+            }
+
+            gradients += '),'
+            positions += `0 ${y / height * 100}%,`
+          }
+
+          console.log('%c​',
+            `background-image:${
+              gradients.slice(0, -1)
+            };background-position:${
+              positions.slice(0, -1)
+            };background-size:100% ${
+              100 / height * pixel * (safari ? 1 : 1.19)
+            }%;font-size: ${
+              safari ? 224 : 215
+            }px;font-family:monospace;background-repeat:no-repeat;padding-left: 256px`
+          )
+
+          console.log(`%c${
+            document.querySelector('h1').textContent.trim()
+          }\n\n${[...document.querySelectorAll('li')]
+            .map((li) => `~ ${li.textContent.trim()}`)
+            .join('\n')
+          }`, 'font-family:Menlo,monospace')
+        } catch (_) {
+
+        }
+      })()
+    </script>
   </body>
 </html>
