@@ -134,24 +134,65 @@
 
           d = undefined
 
-          console.log('%c​',
-            `background-image:${
-              gradients.slice(0, -1)
-            };background-position:${
-              positions.slice(0, -1)
-            };background-size:100% ${
-              100 / height * pixel * (safari ? 1 : 1.19)
-            }%;font-size: ${
-              safari ? 224 : 215
-            }px;font-family:monospace;background-repeat:no-repeat;padding-left: 256px`
-          )
+          Object.defineProperties(window, {
+            email: {
+              get() {
+                setTimeout(() => {
+                  document.querySelector('a[href="mailto:hello@julien.gl"]').click()
+                }, 1)
+                return 'Sending email to hello@julien.gl'
+              }
+            },
+            github: {
+              get() {
+                setTimeout(() => {
+                  document.querySelector('a[href="https://github.com/juliendargelos"]').click()
+                }, 1)
+                return 'Opened GitHub profile'
+              }
+            },
+            plutotcool: {
+              get() {
+                setTimeout(() => {
+                  document.querySelector('a[href="https://plutot.cool"]').click()
+                }, 1)
+                return 'Opened plutot.cool website'
+              }
+            },
+            help: {
+              get() {
+                setTimeout(help, 1)
+              }
+            }
+          })
 
-          console.log(`%c${
-            document.querySelector('h1').textContent.trim()
-          }\n\n${[...document.querySelectorAll('li')]
-            .map((li) => `~ ${li.textContent.trim()}`)
-            .join('\n')
-          }`, 'font-family:Menlo,monospace')
+          help()
+
+          function help() {
+            console.log('%c​',
+              `background-image:${
+                gradients.slice(0, -1)
+              };background-position:${
+                positions.slice(0, -1)
+              };background-size:100% ${
+                100 / height * pixel * (safari ? 1 : 1.19)
+              }%;font-size: ${
+                safari ? 224 : 215
+              }px;font-family:monospace;background-repeat:no-repeat;padding-left: 256px`
+            )
+
+            console.log(`%c${
+              document.querySelector('h1').textContent.trim()
+            }\n\n${[...document.querySelectorAll('li')]
+              .map((li) => `~ ${li.textContent.trim()}`)
+              .join('\n')
+            }\n​`, 'font-family:Menlo,monospace;font-size:12px')
+
+            console.log(
+              '%cAvailable commands:\n\nemail          Send email\ngithub         Open GitHub profile\nplutotcool     Open plutot.cool website\nhelp           Print this help',
+              'font-family:Menlo,monospace;font-size:12px'
+            )
+          }
         } catch (_) {
 
         }
