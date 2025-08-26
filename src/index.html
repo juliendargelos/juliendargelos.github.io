@@ -108,7 +108,7 @@
           context.canvas.height = height
           context.drawImage(image, 0, 0)
 
-          const { data: d } = context.getImageData(0, 0, width, height)
+          let { data: d } = context.getImageData(0, 0, width, height)
 
           context.canvas.width = 0
           context.canvas.height = 0
@@ -131,6 +131,8 @@
             gradients += '),'
             positions += `0 ${y / height * 100}%,`
           }
+
+          d = undefined
 
           console.log('%c​',
             `background-image:${
