@@ -74,8 +74,9 @@
       <h1>julien dargelos</h1>
       <ul>
         <li>cofondateur et directeur technique chez <a href="https://plutot.cool" target="_blank">plutot.cool</a></li>
-        <li>développeur et designer interactif: <a href="mailto:hello@julien.gl">hello@julien.gl</a></li>
+        <!-- <li>développeur et designer interactif: <a href="mailto:hello@julien.gl">hello@julien.gl</a></li> -->
         <li>intervenant pédagogique à <a href="https://www.gobelins.fr" target="_blank">gobelins</a>, <a href="https://www.ecv.fr" target="_blank">ecv</a>, <a href="https://www.iut.u-bordeaux-montaigne.fr" target="_blank">bdx&nbsp;montaigne</a></li>
+        <li>formateur en développement web: <a href="https://formation.julien.gl" target="_blank">formation.julien.gl</a></li>
         <li>contributeur open source sur github: <a href="https://github.com/juliendargelos" target="_blank">@juliendargelos</a></li>
       </ul>
     </div>
@@ -159,6 +160,14 @@
                 return 'Opened plutot.cool website'
               }
             },
+            teaching: {
+              get() {
+                setTimeout(() => {
+                  document.querySelector('a[href="https://formation.julien.gl"]').click()
+                }, 1)
+                return 'Opened formation.julien.gl website'
+              }
+            },
             help: {
               get() {
                 setTimeout(help, 1)
@@ -189,7 +198,7 @@
             }\n​`, 'font-family:Menlo,monospace;font-size:12px')
 
             console.log(
-              '%cAvailable commands:\n\nemail          Send email\ngithub         Open GitHub profile\nplutotcool     Open plutot.cool website\nhelp           Print this help',
+              '%cAvailable commands:\n\nemail          Send email\ngithub         Open GitHub profile\nplutotcool     Open plutot.cool website\nteaching       Open formation.julien.gl website\nhelp           Print this help',
               'font-family:Menlo,monospace;font-size:12px'
             )
           }
